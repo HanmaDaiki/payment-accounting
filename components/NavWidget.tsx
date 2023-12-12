@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import MyButton from './MyButton';
 
 function AuthButton() {
   const { data: session } = useSession();
@@ -15,24 +16,24 @@ function AuthButton() {
           <span className='text-sm font-bold'>{session.user?.name}</span>
         </div>
         <br />
-        <button
+        <MyButton
+          color='red'
           onClick={() => signOut()}
-          className='rounded text-sm bg-blue-500 p-2 text-white hover:bg-blue-600 focus:bg-blue-700'
         >
           Sign out
-        </button>
+        </MyButton>
       </div>
     );
   }
 
   return (
     <>
-      <button
+      <MyButton
+        color='blue'
         onClick={() => signIn()}
-        className='rounded text-sm bg-blue-500 p-2 text-white hover:bg-blue-600 focus:bg-blue-700'
       >
         Sign in
-      </button>
+      </MyButton>
     </>
   );
 }

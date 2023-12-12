@@ -9,7 +9,7 @@ export async function GET() {
   try {
     const data = await prisma.order.findMany({
       where: {
-        userId: session?.user?.id
+        userId: session.user.id
       },
       select: {
         id: true,

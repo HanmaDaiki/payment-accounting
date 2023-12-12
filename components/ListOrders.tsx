@@ -18,7 +18,11 @@ export default function ListOrder() {
   async function getOrders() {
     const response = await fetch('/api/orders');
     const data = await response.json();
-    setOrders(data.orders);
+
+    if(data.orders) {
+      setOrders(data.orders);
+    }
+    
     setLoading(false);
   };
 

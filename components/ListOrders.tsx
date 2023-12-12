@@ -36,7 +36,7 @@ export default function ListOrder() {
         orders.map((order) => {
           const date = new Date(order.createAt);
 
-          return <li>
+          return <li key={order.id}>
             <CardContainer>
               <h1><span className="font-bold">Name order:</span>  {order.name}</h1>
               <p>

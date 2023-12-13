@@ -37,9 +37,22 @@ export async function POST(req: NextRequest) {
         name: body.name,
         price: Number(body.price)
       }
-    })
+    });
+    
+    const data = await prisma.order.findMany({
+      where: {
+        userId: session.user.id
+      },
+      select: {
+        id: true,
+        createAt: true,
+        price: true,
+        name: true,
+        paymentState: true
+      }
+    });
 
-    return NextResponse.json({ message: 'Order created!' }, { status: 200 });
+    return NextResponse.json({ orders: data }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 400 })
   }

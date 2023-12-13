@@ -3,8 +3,13 @@ import { useState } from "react";
 import CardContainer from "./CardContainer";
 import MyButton from "./MyButton";
 import MyInput from "./MyInput";
+import { TOrder } from "@/lib/TOrder";
 
-export default function AddNewOrder() {
+type Props = {
+  setOrders: (array: TOrder[]) => void;
+}
+
+export default function AddNewOrder({ setOrders }: Props) {
   const [nameOrder, setNameOreder] = useState('');
   const [priceOrder, setPriceOrder] = useState('');
 
@@ -15,10 +20,13 @@ export default function AddNewOrder() {
       price: priceOrder
     });
 
-    await fetch('/api/orders', {
+    const response = await fetch('/api/orders', {
       method: 'POST',
       body,
-    })
+    });
+    const data = await response.json();
+
+    setOrders(data.orders);
 
     setNameOreder('');
     setPriceOrder('');

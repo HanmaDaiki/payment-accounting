@@ -1,32 +1,15 @@
 'use client'
-import { useEffect, useState } from "react";
 import CardContainer from "./CardContainer";
 import MyInput from "./MyInput";
 import MyButton from "./MyButton";
+import { TOrder } from '@/lib/TOrder';
 
-type Order = {
-  id: string,
-  name: string,
-  price: number,
-  createAt: string,
-  paymentState: boolean,
+type Props = {
+  orders: TOrder[];
+  setOrders: (array: TOrder[]) => void;
 }
 
-export default function ListOrder() {
-  const [loading, setLoading] = useState(true);
-  const [orders, setOrders] = useState<Order[]>([]);
-
-  async function getOrders() {
-    const response = await fetch('/api/orders');
-    const data = await response.json();
-
-    if (data.orders) {
-      setOrders(data.orders);
-    }
-
-    setLoading(false);
-  };
-
+export default function ListOrder({ orders, setOrders }: Props) {
   async function deleteOrderById(id: string) {
     const body = JSON.stringify({ id });
     console.log(id);
@@ -37,14 +20,6 @@ export default function ListOrder() {
     const data = await response.json();
 
     setOrders(data.orders);
-  }
-
-  useEffect(() => {
-    getOrders();
-  }, [])
-
-  if (loading) {
-    return null;
   }
 
   return (

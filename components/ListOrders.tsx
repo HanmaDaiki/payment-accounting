@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import CardContainer from "./CardContainer";
 import MyInput from "./MyInput";
+import MyButton from "./MyButton";
 
 type Order = {
   id: string,
@@ -19,12 +20,24 @@ export default function ListOrder() {
     const response = await fetch('/api/orders');
     const data = await response.json();
 
-    if(data.orders) {
+    if (data.orders) {
       setOrders(data.orders);
     }
-    
+
     setLoading(false);
   };
+
+  async function deleteOrderById(id: string) {
+    const body = JSON.stringify({ id });
+    console.log(id);
+    const response = await fetch('/api/orders/remove', {
+      method: 'DELETE',
+      body,
+    });
+    const data = await response.json();
+
+    setOrders(data.orders);
+  }
 
   useEffect(() => {
     getOrders();
@@ -35,7 +48,7 @@ export default function ListOrder() {
   }
 
   return (
-    <ul className="flex gap-5 wrap">
+    <ul className="flex gap-5 flex-wrap">
       {
         orders.map((order) => {
           const date = new Date(order.createAt);
@@ -57,6 +70,8 @@ export default function ListOrder() {
                 <MyInput type="checkbox" checked={order.paymentState} />
                 paid?
               </label>
+
+              <MyButton color='red' onClick={() => deleteOrderById(order.id)}>Delete</MyButton>
             </CardContainer>
           </li>
         })

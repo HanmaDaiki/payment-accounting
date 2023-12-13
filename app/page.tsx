@@ -22,8 +22,6 @@ export default function Home() {
               <Image src='/notAuth.png' width={150} height={100} alt="Not auth" priority /> 
             </div>
         }
-
-
       </main>
     </>
   )

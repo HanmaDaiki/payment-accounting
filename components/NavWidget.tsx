@@ -20,7 +20,7 @@ function AuthButton() {
           color='red'
           onClick={() => signOut()}
         >
-          Sign out
+          Выход
         </MyButton>
       </div>
     );
@@ -32,7 +32,7 @@ function AuthButton() {
         color='blue'
         onClick={() => signIn()}
       >
-        Sign in
+        Вход
       </MyButton>
     </>
   );

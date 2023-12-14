@@ -40,23 +40,23 @@ export default function ListOrder({ orders, setOrders }: Props) {
 
           return <li key={order.id}>
             <CardContainer>
-              <h1><span className="font-bold">Name order:</span>  {order.name}</h1>
+              <h1><span className="font-bold">Услуга:</span>  {order.name}</h1>
               <p>
-                <span className="font-bold">Price:</span>  {order.price}
+                <span className="font-bold">Цена:</span>  {order.price}
               </p>
               <p>
                 <span className="font-bold">
-                  Created At:</span> {date.getDay()}.{date.getMonth()}.{date.getFullYear()}
+                  Дата:</span> {date.getDay()}.{date.getMonth()}.{date.getFullYear()}
               </p>
               <p>
-                <span className="font-bold">Time:</span>  {date.getHours()}:{date.getMinutes()}:{date.getSeconds()}
+                <span className="font-bold">Время:</span>  {date.getHours()}:{date.getMinutes()}:{date.getSeconds()}
               </p>
               <label className="flex gap-2">
                 <MyInput type="checkbox" checked={order.paymentState} onChange={() => toggleChecked(order.id, !order.paymentState)} />
-                paid?
+                Оплата пришла?
               </label>
 
-              <MyButton color='red' onClick={() => deleteOrderById(order.id)}>Delete</MyButton>
+              <MyButton color='red' onClick={() => deleteOrderById(order.id)}>Удалить</MyButton>
             </CardContainer>
           </li>
         })

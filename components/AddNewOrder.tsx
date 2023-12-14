@@ -36,10 +36,10 @@ export default function AddNewOrder({ setOrders }: Props) {
   return (
     <CardContainer>
       <form onSubmit={createOrder} className='flex flex-col w-full gap-2'>
-        <h1 className="text-2xl">Add new order</h1>
-        <MyInput required value={nameOrder} onChange={(e) => setNameOreder(e.target.value)} placeholder="Name order" />
-        <MyInput required value={priceOrder} onChange={(e) => setPriceOrder(e.target.value)} placeholder="Price" type="number" />
-        <MyButton type="submit" color="blue">Add new Order</MyButton>
+        <h1 className="text-2xl">Добавить заказ</h1>
+        <MyInput required value={nameOrder} onChange={(e) => setNameOreder(e.target.value)} placeholder="Название услуги" />
+        <MyInput required value={priceOrder} onChange={(e) => setPriceOrder(e.target.value)} placeholder="Цена за услугу" type="number" />
+        <MyButton type="submit" color="blue">Создать</MyButton>
       </form>
     </CardContainer>
   );

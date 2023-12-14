@@ -12,7 +12,6 @@ type Props = {
 export default function ListOrder({ orders, setOrders }: Props) {
   async function deleteOrderById(id: string) {
     const body = JSON.stringify({ id });
-    console.log(id);
     const response = await fetch('/api/orders/remove', {
       method: 'DELETE',
       body,
@@ -21,6 +20,17 @@ export default function ListOrder({ orders, setOrders }: Props) {
 
     setOrders(data.orders);
   }
+
+  async function toggleChecked(id: string, paymentState: boolean) {
+    const body = JSON.stringify({ id, paymentState });
+    const response = await fetch('/api/orders/checked', {
+      method: 'PATCH',
+      body,
+    });
+    const data = await response.json();
+
+    setOrders(data.orders);
+  };
 
   return (
     <ul className="flex gap-5 flex-wrap">
@@ -42,7 +52,7 @@ export default function ListOrder({ orders, setOrders }: Props) {
                 <span className="font-bold">Time:</span>  {date.getHours()}:{date.getMinutes()}:{date.getSeconds()}
               </p>
               <label className="flex gap-2">
-                <MyInput type="checkbox" checked={order.paymentState} />
+                <MyInput type="checkbox" checked={order.paymentState} onChange={() => toggleChecked(order.id, !order.paymentState)} />
                 paid?
               </label>
 

@@ -1,19 +1,22 @@
-import { getServerSession } from "next-auth";
-import { NextRequest, NextResponse } from "next/server";
-import authOptions from "@/lib/authOptions";
-import prisma from "@/lib/prisma";
+import { getServerSession } from 'next-auth';
+import { NextResponse, NextRequest } from 'next/server';
+import authOptions from '@/lib/authOptions';
+import prisma from '@/lib/prisma';
 
-export async function DELETE(req: NextRequest, res: NextResponse) {
+export async function PATCH(req: NextRequest, res: NextResponse) {
   const body = await req.json();
   const session = await getServerSession(authOptions);
 
-  await prisma.order.delete({
+  await prisma.order.update({
     where: {
       id: body.id,
       userId: session.user.id
+    },
+    data: {
+      paymentState: body.paymentState
     }
   });
-  
+
   const orders = await prisma.order.findMany({
     where: {
       userId: session.user.id

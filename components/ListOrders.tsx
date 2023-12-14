@@ -35,10 +35,10 @@ export default function ListOrder({ orders, setOrders }: Props) {
   return (
     <ul className="flex gap-5 flex-wrap">
       {
-        orders.map((order) => {
+        orders.sort((x, y) => Number(x.paymentState) - Number(y.paymentState)).map((order) => {
           const date = new Date(order.createAt);
 
-          return <li key={order.id}>
+          return <li key={order.id} className={order.paymentState ? 'opacity-60 hover:opacity-100' : ''}>
             <CardContainer>
               <h1><span className="font-bold">Услуга:</span>  {order.name}</h1>
               <p>
